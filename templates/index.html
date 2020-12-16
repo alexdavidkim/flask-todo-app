@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="static/normalize.css">
+    <link rel="stylesheet" href="static/skeleton.css">
+    <title>To-Do App</title>
+
+    <style>
+        .row {
+            text-align: center;
+        }
+        #delete {
+            background-color: #e2746c;
+            border-bottom-color: #e2746c;
+            border-top-color: #e2746c;
+            border-left-color: #e2746c;
+            border-right-color: #e2746c;
+        }
+        #delete:hover {
+            color: #FFF;
+            background-color: #e95f55;
+            border-color: #e95f55;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding-top: 30px;" class="container">
+        
+        <div class="row" style="text-align: center;">
+            <h3>To-Do</h3>
+
+            <form action="/add" method="post">
+                <input type="text" name="todo" placeholder="Add To-Do">
+                <input class="button-primary" type="submit" value="Add">
+            </form>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="one-half column">
+                <h5><u>Incomplete</u></h5>
+                {% for todo in todos %}
+                    {% if not todo.complete %}
+                        <div>{{ todo.content }}</div>
+                        <a class="button button-primary" href="/change_complete/{{ todo.id }}">Update</a>
+                        <a class="button button-primary" id="delete" href="/delete/{{ todo.id }}">Delete</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="one-half column">
+                <h5><u>Complete</u></h5>
+                {% for todo in todos %}
+                    {% if todo.complete %}
+                        <div>{{ todo.content }}</div>
+                        <a class="button button-primary" href="/change_complete/{{ todo.id }}">Update</a>
+                        <a class="button button-primary" id="delete" href="/delete/{{ todo.id }} ">Delete</a>
+                    {% endif %}
+                {% endfor %}
+            </div>  
+        </div>
+
+    </div>
+
+</body>
+</html>
